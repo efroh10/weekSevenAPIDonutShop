@@ -37,12 +37,12 @@ function useInterface(){
 }
 
 function getInventory(){
-   console.log(masterInventory);
+   alert(masterInventory);
    useInterface();
 }
 
 function getRevenue(){
-    console.log(revenue);
+    alert(revenue);
     useInterface();
 }
 
@@ -110,23 +110,3 @@ function newOrder(type, number){
     increaseRevenue(type, number);
     useInterface();
 }
-
-
-// const glazed = new Donut('Glazed Donut', 1, 10);
-
-// const jellyFilled = new Donut('Jelly-Filled Donut', 1.5, 8);
-
-// const myInventory = {
-//     "Glazed Donut": new Donut('Glazed Donut', 1,10)
-// }
-
-// myInventory["new donut"] = new Donut(sadf)
-// inventoryUpdate(type, price, inventory){
-//     if (inventory == undefined){
-//         inventory = 0;
-//     }
-//     masterInventory[type] = {};
-//     masterInventory[type].price = price;
-//     masterInventory[type].inventory = inventory;
-// }
-// this.inventoryUpdate(type, price, inventory);
