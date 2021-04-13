@@ -14,7 +14,7 @@ const masterInventory = {
 let revenue = 0;
 
 function useInterface(){
-    let task = prompt('What is your bidding, my master? Enter the number corresponding to the task you\'d like to perform: 1: Print Inventory and Prices, 2: Print Total Revenue, 3: Create New Donut Type, 4: Update Inventory, 5: Place Order, 6: Quit Program', '1');
+    let task = prompt('What is your bidding, my master? Enter the number corresponding to the task you\'d like to perform: 1): Print Inventory and Prices, 2): Print Total Revenue, 3): Create New Donut Type, 4): Update Inventory, 5): Place Order, 6): Change a Price, 7): Give Refund, 8): Quit Program', '1');
     switch (task) {
         case '1':
             getInventory();
@@ -32,12 +32,20 @@ function useInterface(){
             newOrder(newOrderType(), newOrderNumber());
             break;
         case '6':
+            changePrice(newPriceType(), newPrice());
+            break;
+        case '7':
+            giveRefund(getRefund());
+            break;
+        case '8':
             break;
     }
 }
-
+//becuae prompt takes precedence over console.log(), 
+// the result of running this function is not visible until after the program has been quit. 
+// I tried alert, but that didn't print the actual object, just '{object Object}'
 function getInventory(){
-   alert(masterInventory);
+   console.log(masterInventory); 
    useInterface();
 }
 
@@ -70,7 +78,7 @@ function newDonut(type, name, price, inventory){
     masterInventory[type] = new Donut(name, price, inventory);
     useInterface();
 }
-
+//this program assumes throughout that the user knows all donut types.
 function increaseType(){
     increasedType = prompt('Enter the type of donut for which you\'d like to increase the inventory.');
     return increasedType;  
@@ -106,7 +114,37 @@ function increaseRevenue(type, number){
 }
 
 function newOrder(type, number){
+    if (number > masterInventory[type].inventory){
+        number = masterInventory[type].inventory;
+    }
     decreaseInventory(type, number);
     increaseRevenue(type, number);
     useInterface();
 }
+
+function newPriceType(){
+    changedType = prompt('Enter the type of donut for which you\'d like to change the price.');
+    return changedType;
+}
+
+function newPrice(){
+    changedPrice = Number(prompt('Enter the new price.'));
+    return changedPrice;
+}
+
+function changePrice(type, number){
+    masterInventory[type].price = number;
+    useInterface();
+}
+
+function getRefund(){
+    refund = Number(prompt('Enter the amount of the refund.'));
+    return refund;
+}
+
+function giveRefund(number){
+    revenue -= number;
+    useInterface();
+}
+
+useInterface();
