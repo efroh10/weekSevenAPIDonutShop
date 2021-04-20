@@ -30,7 +30,7 @@ function useInterface(){
             changePrice(newPriceType(), newPrice());
             useInterface();
             break;
-        case '7':
+        case '7': //because refund calculation is handled on the api side simply by multiplying price by number of donuts, if price has been changed between an example order and refund, the refund will be different than the purchase.
             giveRefund(getRefundType(), getRefundNumber());
             useInterface();
             break;
